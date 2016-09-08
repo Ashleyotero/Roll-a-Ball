@@ -21,29 +21,19 @@ public class Player2Controller : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
+		//player 2
+		float moveHorizontal = Input.GetAxis ("Horizontal");
+		float moveVertical = Input.GetAxis ("Vertical");
 
-		if(Input.GetKeyDown(KeyCode.A)) //left
-		{
-			Vector3 movement = Vector3.left;
-			rb.AddForce (movement * speed);
-		}
-		if(Input.GetKeyDown(KeyCode.D)) //right
-		{
-			Vector3 movement = Vector3.right;
-			rb.AddForce (movement * speed);
-		}
-		if(Input.GetKeyDown(KeyCode.S)) //down
-		{
-			Vector3 movement = Vector3.down;
-			rb.AddForce (movement * speed);
-		}
-		if(Input.GetKeyDown(KeyCode.A)) //up
-		{
-			Vector3 movement = Vector3.up;
-			rb.AddForce (movement * speed);
-		}
+		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 
-		//Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+		rb.AddForce (movement * speed * Time.deltaTime);
+
+		if (Input.GetKeyDown ("space") && rb.transform.position.y <= 0.5f) {
+			Vector3 jump = new Vector3 (0.0f, 200.0f, 0.0f);
+
+			rb.AddForce (jump);
+		}
 
 	}
 
